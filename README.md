@@ -51,6 +51,7 @@ Feel free to provide feedback or contribute to this project by creating issues o
 This project is licensed under the [MIT License](LICENSE).
 
 ## Screenshots
-![image](https://github.com/divyesh1099/swiftshare/assets/65925922/f6eac72f-0c36-49a1-b0c0-fe15fac5c57e)
+![image](https://github.com/divyesh1099/swiftshare/assets/65925922/2f379b8a-1378-4065-a4c7-937c49fdfc35)
+
 ![image](https://github.com/divyesh1099/swiftshare/assets/65925922/20926384-4551-4a87-9c53-11db478891bf)
 
