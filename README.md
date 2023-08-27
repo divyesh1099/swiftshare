@@ -31,7 +31,7 @@ pip install openpyxl
 
 4. Run the application by executing the following command:
 ```cmd
-python email_sender.py
+python base.py
 ```
 
 5. The application will prompt you to select a folder using a graphical interface. Choose a folder that contains the Excel sheet and attachments.
