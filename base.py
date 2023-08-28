@@ -42,10 +42,10 @@ def getTargetFolder():
 
 def main():
     sender_email = "@gmail.com"
-    sender_password = "Password@1234"
+    sender_password = ""
     target_folder = getTargetFolder()
     excel_file = target_folder + "/RecepientsAttachments.xlsx"
-    attachments_folder = target_folder
+    attachments_folder = target_folder+"/attachments/"
     
     wb = openpyxl.load_workbook(excel_file)
     sheet = wb.active
