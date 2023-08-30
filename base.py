@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import smtplib
 import pandas as pd
@@ -24,7 +25,7 @@ def send_email(subject, body, to_email, attachments):
     msg.attach(MIMEText(body, 'plain'))
 
     for attachment in attachments:
-        with open(".." + attachment, "rb") as attach_file:
+        with open( attachment, "rb") as attach_file:
             part = MIMEApplication(attach_file.read(), Name=os.path.basename(attachment))
             part['Content-Disposition'] = f'attachment; filename="{os.path.basename(attachment)}"'
             msg.attach(part)
@@ -55,7 +56,7 @@ def get_excel_filename(folder_path):
 def main():
     target_folder = getTargetFolder()
     excel_file = get_excel_filename(target_folder)
-    attachments_folder = ".."+target_folder
+    attachments_folder = target_folder
     
     # Read Excel sheet
     excel_data = pd.read_excel(target_folder + "/" + excel_file)
