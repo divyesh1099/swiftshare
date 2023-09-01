@@ -5,9 +5,56 @@ import pandas as pd
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
-import openpyxl
 import tkinter as tk
 from tkinter import filedialog
+import subprocess
+
+def convertRTFtoHTML(rtf_text):
+    # Define the output HTML file path
+    html_file_path = '/home/ILMSI/swiftshare/result.html'
+
+    # Create a temporary RTF file to store the RTF data
+    temp_rtf_file = '/home/ILMSI/swiftshare/temp.rtf'
+
+    with open(temp_rtf_file, 'w') as rtf_file:
+        rtf_file.write(rtf_text)
+
+    # Convert the RTF data to HTML using LibreOffice
+    conversion_command = [
+        'libreoffice',
+        '--headless',
+        '--convert-to',
+        'html',
+        '--outdir',
+        './',
+        temp_rtf_file
+    ]
+
+    try:
+        subprocess.run(conversion_command, check=True)
+        print(f'RTF to HTML conversion complete. HTML file saved to {html_file_path}')
+    except subprocess.CalledProcessError as e:
+        print(f'Error during conversion: {e}')
+
+    # Clean up the temporary RTF file
+    os.remove(temp_rtf_file)
+
+    # Read The Temp.html file and delete the HTML file 
+    html_content = read_and_delete_html_file("./temp.html")
+    return html_content
+    
+def read_and_delete_html_file(file_path):
+    try:
+        with open(file_path, 'r') as html_file:
+            html_content = html_file.read()
+        
+        # Delete the HTML file
+        os.remove(file_path)
+
+        return html_content
+    except FileNotFoundError:
+        return None
+
 def send_email(subject, body, to_email, attachments):
     # Email configuration
     smtp_server = 'smtp.gmail.com'
@@ -21,8 +68,8 @@ def send_email(subject, body, to_email, attachments):
     msg['From'] = sender_email
     msg['To'] = ', '.join(to_email)
     msg['Subject'] = subject
-
-    msg.attach(MIMEText(body, 'plain'))
+    body = convertRTFtoHTML(body)
+    msg.attach(MIMEText(body, 'html'))
 
     for attachment in attachments:
         with open( attachment, "rb") as attach_file:
@@ -54,6 +101,8 @@ def get_excel_filename(folder_path):
     return None
 
 def main():
+    sender_email = "ajit0810@gmail.com"
+    sender_password = "ekcydglhzixwgxxb"
     target_folder = getTargetFolder()
     excel_file = get_excel_filename(target_folder)
     attachments_folder = target_folder
