@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Name=My Python Script
+Exec=/home/ILMSI/swiftshare/base.py
+Terminal=false
+Type=Application
+Icon=/home/ILMSI/swiftshare/d.png
+
+Name[en_US]=IDAK

@@ -59,9 +59,9 @@ def send_email(subject, body, to_email, attachments):
     # Email configuration
     smtp_server = 'smtp.gmail.com'
     smtp_port = 587
-    smtp_username = 'ajit0810'
-    smtp_password = "ekcydglhzixwgxxb"
-    sender_email = 'ajit0810@example.com'
+    smtp_username = 'momb.communication@gmail.com'
+    smtp_password = "lhxvxxfhskdmnfnj"
+    sender_email = 'momb.communication@gmail.com'
 
     # Create the email
     msg = MIMEMultipart()
@@ -101,8 +101,8 @@ def get_excel_filename(folder_path):
     return None
 
 def main():
-    sender_email = "ajit0810@gmail.com"
-    sender_password = "ekcydglhzixwgxxb"
+    sender_email = "momb.communication@gmail.com"
+    sender_password = "lhxvxxfhskdmnfnj"
     target_folder = getTargetFolder()
     excel_file = get_excel_filename(target_folder)
     attachments_folder = target_folder
