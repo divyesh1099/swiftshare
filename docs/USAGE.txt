@@ -1,0 +1,52 @@
+﻿Usage Guide for IDAK Application
+This document provides step-by-step instructions on how to use the IDAK application to send bulk personalized emails based on data from an Excel file.
+Starting the Application
+1. Open Terminal or Command Prompt:
+   * Navigate to your system’s terminal (Linux/MacOS) or command prompt (Windows).
+2. Navigate to Application Directory:
+Change the directory to where the IDAK application is located with the cd command:
+cd path/to/idak
+   * Replace path/to/idak with the actual path to the IDAK application directory.
+3. Run the Application:
+Execute the application by running:
+python base.py
+   *    * Ensure that you are using the correct version of Python if multiple versions are installed on your system. You may need to use python3 instead of python.
+Using the Graphical User Interface (GUI)
+Upon launching the application, a GUI window will open if the application requires you to select a folder:
+1. Select Folder:
+   * Use the file dialog to navigate to and select the folder containing your Excel file and attachments.
+2. Confirmation:
+   * Confirm your selection, and the GUI will close, allowing the application to proceed with sending emails.
+Excel File Format
+* The Excel file should have specific columns for:
+   * EmailAddress: Recipient’s email address.
+   * SubjectLine: Subject line for the email.
+   * Body: The body of the email, which can be in RTF format.
+   * OrderRef: A reference to any attachments by filename, separated by commas if multiple.
+Sending Emails
+After you have selected the folder with the GUI:
+1. Processing:
+   * The application will read the Excel file and process each row as an individual email.
+2. Converting Content:
+   * If the body of the email is in RTF format, the application will automatically convert it to HTML.
+3. Attaching Files:
+   * The application will attach any files referenced in the OrderRef column of the Excel file to the respective email.
+4. Dispatching Emails:
+   * Emails will be sent to each recipient with the customized subject and body, along with any attachments.
+Monitoring Progress
+* The application will log actions in the terminal or command prompt window.
+* You can monitor this output to track the progress of the email sending process.
+* Any errors encountered during the process will be logged here.
+Completion
+* Once the application has processed all entries in the Excel file, it will finish running, and you will see a completion message in the terminal or command prompt window.
+Error Handling
+* If an error occurs, the application will log a descriptive message to help diagnose the issue.
+* Common errors may include issues with file paths, email server connectivity, or formatting errors in the Excel file.
+Support
+If you encounter issues or require assistance:
+* Consult the TROUBLESHOOTING.txt document for guidance on common issues.
+* Contact the IT support team or the designated contact person for additional help.
+Best Practices
+* Always verify the Excel file for the correct format and data before running the application.
+* Do not close the terminal or command prompt window while the application is running, as this may interrupt the email sending process.
+Thank you for using the IDAK application. Should you have any questions or suggestions, please reach out to the support team.

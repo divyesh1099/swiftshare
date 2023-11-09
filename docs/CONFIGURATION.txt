@@ -1,0 +1,36 @@
+﻿Configuration Guide for IDAK Application
+This document provides detailed instructions on how to configure the IDAK application after installation. Proper configuration is crucial to ensure the application functions correctly and securely.
+Overview
+Configuration of the IDAK application involves setting up necessary parameters that allow the application to send emails, locate files, and authenticate with your email server.
+Configuring config_secrets.py
+The config_secrets.py file contains all the configurable parameters of the IDAK application. Follow these steps to complete the configuration:
+1. Locate Config File:
+   * Find the config_secrets.py file in the root directory of the application.
+2. Open Config File:
+   * Use a text editor to open config_secrets.py.
+3. Edit SMTP Settings:
+   * SMTP_SERVER: The SMTP server URL for the email service provider (e.g., smtp.gmail.com for Gmail).
+   * SMTP_PORT: The SMTP port number (commonly 587 for TLS).
+   * SMTP_USERNAME: The full email address used to authenticate with the SMTP server.
+   * SMTP_PASSWORD: The password or application-specific password for the SMTP server.
+4. Configure Sender Email:
+   * SENDER_EMAIL: The email address that will appear in the “From” field of sent emails.
+5. Set Paths for Files:
+   * HTML_FILE_PATH: The path where the converted HTML files should be saved temporarily.
+   * TEMP_RTF_FILE: The path for temporary storage of RTF files before conversion.
+6. Save Changes:
+After entering the correct details, save and close the config_secrets.py file.
+
+   * Security Considerations
+* Password Storage: Avoid storing plain text passwords in the config_secrets.py file. Use environment variables or a secure credential management system.
+* Authentication: If possible, enable two-factor authentication for your email account and use an application-specific password.
+* Permissions: Restrict the permissions of the config_secrets.py file so that only authorized users can read or modify it.
+Verifying Configuration
+After setting up the config_secrets.py file:
+1. Run a test instance of the application to ensure that it can send emails successfully.
+2. Check that the application can correctly access and process the Excel file.
+3. Verify that the application can find and attach files as specified in the Excel data.
+If any errors occur, revisit the config_secrets.py settings to ensure all paths and credentials are correct.
+Support
+For additional support with configuration, please refer to the SUPPORT.txt file or contact the designated support personnel within your organization.
+By following this guide, you should be able to configure the IDAK application successfully for use in sending bulk personalized emails.

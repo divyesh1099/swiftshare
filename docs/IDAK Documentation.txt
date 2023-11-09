@@ -1,0 +1,23 @@
+﻿IDAK Documentation
+Welcome to the documentation folder for the IDAK application. This folder contains detailed documentation that supports the use, configuration, maintenance, and understanding of the IDAK application, a Python utility designed for sending bulk personalized emails.
+Documentation Overview
+The following documents are included in this folder:
+* INSTALLATION.txt: Detailed installation instructions, prerequisites, and guidance for setting up the IDAK application on a new system.
+* CONFIGURATION.txt: A comprehensive guide on how to configure the IDAK application, including setting up the config_secrets.py file and environment variables.
+* USAGE.txt: Step-by-step instructions on how to use the IDAK application, from running the script to selecting files and directories through the graphical user interface.
+* SECURITY_GUIDELINES.txt: Best practices and recommendations to ensure the secure operation of the IDAK application, including password protection and authentication measures.
+* TESTING_GUIDE.txt: Instructions on how to execute unit tests, the importance of mocking external services, and how to interpret test results.
+* TROUBLESHOOTING.txt: Common issues that may arise during the use of the IDAK application and their potential solutions.
+* MAINTENANCE.txt: Guidelines for the regular maintenance of the IDAK application, including updating dependencies and auditing the codebase for security.
+* LICENSE.txt: The terms and conditions for the use of the IDAK application within your organization.
+* DEVELOPER_NOTES.txt: Additional notes and technical details that may be of interest to developers and maintainers of the IDAK application.
+Additional Resources
+* images/: A directory containing screenshots and visual aids demonstrating the IDAK application’s user interface and features.
+Updating Documentation
+It is crucial that all documentation remains up-to-date with the current version of the IDAK application. Contributors to the documentation should adhere to the following practices:
+* Reflect any changes to the application’s functionality promptly in the relevant documents.
+* Ensure clarity, accuracy, and conciseness in all written material.
+* Follow the established formatting and style guidelines to maintain consistency across all documents.
+Acknowledgements
+We extend our gratitude to all contributors who have assisted in the development and documentation of the IDAK application. Your efforts continue to enhance the efficiency and reliability of our email communication processes.
+Thank you for using IDAK.

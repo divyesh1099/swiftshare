@@ -1,0 +1,57 @@
+﻿Troubleshooting Guide for IDAK Application
+Encountering issues during the use of the IDAK application can be frustrating. This guide is designed to help diagnose and resolve the most common problems users may face.
+Common Issues and Resolutions
+Issue: Application Does Not Start
+Symptoms:
+* The application does not respond when attempting to launch.
+* Error messages indicating missing modules or libraries.
+Resolutions:
+1. Check that Python is correctly installed and added to the system’s PATH.
+2. Verify that all required dependencies are installed. Re-run pip install -r requirements.txt to ensure all packages are up to date.
+3. If there are error messages, read them carefully to identify any missing modules, and install them as needed.
+Issue: Email Sending Fails
+Symptoms:
+* Emails are not being sent out.
+* Error messages related to SMTP or authentication.
+Resolutions:
+1. Confirm that the SMTP settings in the config.py file are correct.
+2. Ensure the email account used for sending emails has permissions set for app access.
+3. If using two-factor authentication, make sure an app-specific password is used.
+4. Check the internet connection and firewall settings that may block outgoing mail.
+Issue: Incorrect Excel File Format
+Symptoms:
+* The application crashes or stops unexpectedly after starting.
+* Error messages about reading or parsing the Excel file.
+Resolutions:
+1. Ensure the Excel file is in the correct format and matches the expected schema (correct column names and data types).
+2. Check that the Excel file is not corrupted and is accessible in the specified directory.
+Issue: Attachments Not Being Sent
+Symptoms:
+* Emails are sent without the expected attachments.
+Resolutions:
+1. Verify that the file paths in the Excel sheet match the actual paths of the attachments.
+2. Check that the attachments are not too large to be sent via email, as this may exceed the email server’s size limits.
+3. Confirm that the application has read access to the directory where attachments are stored.
+Issue: RTF to HTML Conversion Fails
+Symptoms:
+* Emails are sent with the body in RTF format instead of HTML.
+* Error messages related to the RTF to HTML conversion process.
+Resolutions:
+1. Check the LibreOffice installation on the system, as it is used for the conversion process.
+2. Ensure that the paths for temporary RTF and HTML files in config.py are correct and that the application has write permissions to those paths.
+3. Make sure the RTF content in the Excel file is properly formatted.
+Issue: Application Performance Is Slow
+Symptoms:
+* The application takes a long time to process emails.
+* System becomes unresponsive during the operation.
+Resolutions:
+1. Check system resources (CPU, memory) to ensure they are not being overutilized.
+2. Consider breaking up the Excel file into smaller batches if the file is very large.
+3. Review the application logs for any performance-related messages or errors.
+General Troubleshooting Steps
+1. Review Logs: Check the application logs for any error messages or warnings that can provide insight into the issue.
+2. Restart Application: Sometimes, simply restarting the application can resolve transient issues.
+3. Update Application: Ensure that you are using the latest version of the IDAK application, as updates may contain fixes for known issues.
+4. Consult Documentation: Review the application’s documentation, including the README.txt and USAGE.txt, for any steps that may have been missed or misunderstood.
+5. Seek Support: If the issue persists, reach out to the IT support team or the application’s maintainer with details of the problem and any relevant logs or error messages.
+By following this troubleshooting guide, you should be able to resolve common issues encountered with the IDAK application. For unresolved problems, detailed logs and error messages are invaluable when seeking further assistance.

@@ -1,0 +1,45 @@
+﻿Security Guidelines for IDAK Application
+Security is a critical component of the IDAK application’s operation, especially given that it handles sensitive email communication. Adhering to these security guidelines will help protect against unauthorized access and potential data breaches.
+Handling Credentials
+1. Secure Storage:
+   * Never store plain text passwords or sensitive information within the application code or configuration files. Use encrypted storage or environment variables.
+2. App-Specific Passwords:
+   * Use app-specific passwords for email accounts that support them. These are one-time passwords that provide access to your email account for a single application, enhancing security.
+3. Two-Factor Authentication (2FA):
+   * Enable 2FA for your email accounts to add an extra layer of security. When using 2FA, make sure the application is compatible with this security measure.
+4. OAuth Tokens:
+   * Where possible, use OAuth tokens instead of passwords. OAuth provides a more secure way to authenticate and authorize the application to send emails on your behalf without sharing your password.
+Data Transmission
+1. Use of TLS/SSL:
+   * Ensure that all data transmission, especially during the email sending process, uses TLS/SSL encryption to protect data in transit from being intercepted.
+2. Verify Server Certificates:
+   * When configuring the SMTP server in the application, ensure that server certificate verification is enabled and properly configured.
+Code Security
+1. Regular Code Audits:
+   * Conduct regular code audits to check for any vulnerabilities, such as hard-coded credentials or insecure handling of data.
+2. Dependency Updates:
+   * Keep all dependencies up to date, and apply security patches to both the application and the underlying system.
+3. Static Code Analysis:
+   * Utilize tools for static code analysis to detect potential security vulnerabilities within the codebase.
+Access Control
+1. User Permissions:
+   * Restrict the application access to only those users who require it. Use file system permissions to control access to the application files.
+2. Principle of Least Privilege:
+   * Operate the application with the minimum level of privileges necessary. Do not run the application with administrative or root privileges unless absolutely required.
+Monitoring and Logging
+1. Audit Logs:
+   * Maintain audit logs of all activity performed by the application, including successful and failed login attempts, configuration changes, and email sending logs.
+2. Monitor Anomalies:
+   * Set up monitoring to detect and alert on anomalous activities that could indicate a security incident or system compromise.
+Incident Response
+1. Response Plan:
+   * Have an incident response plan in place that includes immediate steps to take if a security breach is suspected.
+2. Contact Information:
+   * Keep an up-to-date list of contact information for all team members who should be notified in the event of a security incident.
+Training and Awareness
+1. User Training:
+   * Ensure that all users of the IDAK application are trained on these security guidelines and understand the importance of following them.
+2. Phishing Awareness:
+   * Educate users on the risks of phishing attacks and how to recognize suspicious emails that may attempt to compromise email account credentials.
+By following these security guidelines, users and administrators of the IDAK application can help maintain the integrity and confidentiality of the application’s operations. Regular reviews of these practices are encouraged to adapt to new security challenges and threat landscapes.
+If you have any questions or need clarification on any of these guidelines, please contact the IT security team or the designated security officer in your organization.

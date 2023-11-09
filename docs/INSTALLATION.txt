@@ -1,0 +1,54 @@
+﻿Installation Guide for IDAK Application
+This document outlines the detailed steps necessary to install and set up the IDAK application on your system. IDAK is designed to streamline the process of sending bulk personalized emails by leveraging data from an Excel file.
+System Requirements
+Before beginning the installation, ensure your system meets the following requirements:
+* Operating System: Windows 7 or later, MacOS, or a Linux distribution.
+* Python Version: Python 3.6 or higher must be installed on the system.
+* Disk Space: At least 50 MB of free space for the application and additional space for temporary files during runtime.
+Python Installation
+If Python is not already installed on your system, follow these steps:
+1. Download the latest Python 3 installer from the official Python website: https://www.python.org/downloads/
+2. Run the installer, ensuring that you check the option to ‘Add Python to PATH’ during installation.
+Once installed, verify the installation by opening a command prompt or terminal and typing:
+python --version
+3. You should see the Python version printed to the console.
+Downloading the Application
+1. Obtain the IDAK application files provided by your IT department or the designated contact person.
+2. Extract the files to a desired location on your file system.
+Installing Required Libraries
+The IDAK application requires several third-party libraries to function properly. These can be installed using the Python package manager pip.
+1. Open a command prompt or terminal window.
+2. Navigate to the directory where the IDAK application files are located.
+Install the required libraries by running:
+pip install -r requirements.txt
+3. This command will automatically install all necessary libraries as specified in the requirements.txt file.
+Configuration
+After installing the necessary libraries, you must configure the application by setting up the config.py file.
+1. Locate the config.py file in the root directory of the application.
+2. Open the file in a text editor.
+3. Fill in the required fields with the appropriate values:
+   * SENDER_EMAIL: The email address you will use to send emails.
+   * EMAIL_PASSWORD: The password or app-specific password for the sender email.
+   * EXCEL_FILE_PATH: The absolute path to the Excel file containing the recipient data.
+   * ATTACHMENTS_DIR_PATH: The path to the directory where the email attachments are located.
+Ensure that the email account used for sending emails has the ‘Allow less secure apps’ option enabled if using an app-specific password or OAuth tokens.
+Final Checks
+Before running the application, perform the following final checks:
+1. Ensure that the paths provided in the configuration file are correct and accessible.
+2. Verify that the Excel file contains the required columns for recipient information, subject lines, email body content, and attachment references.
+3. Check that the attachment files are present in the specified directory and are named correctly as referenced in the Excel file.
+Running the Application
+To launch the IDAK application:
+1. Open a command prompt or terminal window.
+2. Navigate to the directory where the IDAK application files are located.
+Run the application with:
+python base.py
+3. Follow the on-screen prompts to select the necessary files and directories if required.
+Troubleshooting
+* If the application fails to start, check the Python version and ensure all required libraries are installed.
+* For any errors related to email sending, verify the SMTP settings and credentials in the config.py file.
+* If there are issues with Excel file processing, confirm the file format and content match the expected layout.
+For further assistance, contact the IT support team or refer to the TROUBLESHOOTING.txt document in the docs directory.
+Support
+Should you require any help during installation or encounter any issues, please contact the IT support team or the designated personnel responsible for the IDAK application within your organization.
+Thank you for installing the IDAK application. We hope it significantly enhances your email communication workflow.
