@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDAK Server</title>
+    <!-- Include the Tailwind CSS file -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .full-height {
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex justify-center items-center full-height">
+
+    <header class="text-gray-700 body-font">
+        <!-- Your header content goes here -->
+    </header>
+
+    <main>
+        <!-- The main content will be inserted here -->
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+</body>
+
+</html>
