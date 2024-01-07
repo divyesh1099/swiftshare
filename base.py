@@ -2,6 +2,7 @@
 import os
 import re
 import smtplib
+from tkinter import scrolledtext
 import pandas as pd
 import platform
 import subprocess
@@ -14,14 +15,28 @@ from email.mime.application import MIMEApplication
 
 # Import Config Variables and Credentials
 from config_secrets import (SMTP_SERVER, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD,
-                            SENDER_EMAIL, HTML_FILE_PATH, TEMP_RTF_FILE)
+                            SENDER_EMAIL)
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 if platform.system() == "Windows":
     import win32com.client
 
-# Functions
+# UI Functions
+def create_status_screen():
+    screen = tk.Tk()
+    screen.title("Email Status")
+    screen.geometry("600x400")
+    return screen
+
+def update_status(screen, message):
+    status_area = scrolledtext.ScrolledText(screen, width=70, height=20)
+    status_area.pack(pady=10)
+    status_area.insert(tk.END, message + '\n')
+    status_area.yview(tk.END)
+    screen.update_idletasks()
+
+# Email Functions
 
 def convert_rtf_to_html_msword(rtf_text, output_dir):
     """
@@ -108,7 +123,9 @@ def is_valid_email(email):
     pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
     return re.match(pattern, email)
 
-def send_email(subject, body, to_email, attachments):
+
+
+def send_email(subject, body, to_email, attachments, email_status_screen):
     # Using the CONFIG dictionary to access configuration settings
     smtp_server = SMTP_SERVER
     smtp_port = SMTP_PORT
@@ -150,9 +167,12 @@ def send_email(subject, body, to_email, attachments):
             server.starttls()
             server.login(smtp_username, smtp_password)
             server.sendmail(sender_email, to_email, msg.as_string())
+            update_status(email_status_screen, f"Email successfully sent to: {', '.join(to_email)}")
             logging.info(f"Email sent to: {', '.join(to_email)}")
     except Exception as e:
-        logging.error(f"Error sending email: {e}")
+        error_msg = f"Error sending email: {e}"
+        update_status(email_status_screen, error_msg)
+        logging.error(error_msg)
 
 def get_excel_filename(folder_path):
     for filename in os.listdir(folder_path):
@@ -166,6 +186,7 @@ def getTargetFolder():
 
     folder_path = filedialog.askdirectory(title="Select a Folder")
     print(folder_path)
+    root.destroy()
     return folder_path
 
 def main():
@@ -181,7 +202,7 @@ def main():
         return
 
     excel_data = pd.read_excel(os.path.join(target_folder, excel_file))
-    
+    email_status_screen = create_status_screen()
     for index, row in excel_data.iterrows():
         to_email = str(row['EmailAddress']).split(',')
         subject = str(row['SubjectLine'])
@@ -202,7 +223,8 @@ def main():
 
         attachments = [os.path.join(target_folder, ref.strip()) for ref in order_refs]
         
-        send_email(subject, body_html, to_email, attachments)
+        send_email(subject, body_html, to_email, attachments, email_status_screen)
+    email_status_screen.mainloop()
 
 if __name__ == "__main__":
     main()
