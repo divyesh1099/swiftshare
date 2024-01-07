@@ -3,33 +3,74 @@ import os
 import re
 import smtplib
 import pandas as pd
+import platform
+import subprocess
+import logging
+import tkinter as tk
+from tkinter import filedialog
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
-import tkinter as tk
-from tkinter import filedialog
-import subprocess
-import logging
 
 # Import Config Variables and Credentials
-from config_secrets import SMTP_SERVER, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD, SENDER_EMAIL, HTML_FILE_PATH, TEMP_RTF_FILE
+from config_secrets import (SMTP_SERVER, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD,
+                            SENDER_EMAIL, HTML_FILE_PATH, TEMP_RTF_FILE)
 
-# It's good practice to set up logging instead of using print statements
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# Removed hardcoded paths and credentials
-# Ideally, these should be configured in a separate config file or environment variables
+if platform.system() == "Windows":
+    import win32com.client
 
+# Functions
 
-def convertRTFtoHTML(rtf_text, output_dir):
-    # Using the CONFIG dictionary to access configuration settings
-    temp_rtf_file = TEMP_RTF_FILE
-    html_file_path = HTML_FILE_PATH
+def convert_rtf_to_html_msword(rtf_text, output_dir):
+    """
+    Convert RTF to HTML using MS Word (Windows only)
+    """
+    # Ensure this is only run on Windows
+    if platform.system() != "Windows":
+        logging.error("MS Word conversion is only available on Windows.")
+        return None
 
+    # Path setup
+    temp_rtf_file = os.path.join(output_dir, "temp.rtf")
+    html_file_path = os.path.join(output_dir, "output.html")
+
+    # Write RTF content to a temporary file
     with open(temp_rtf_file, 'w') as rtf_file:
         rtf_file.write(rtf_text)
 
-    # Convert the RTF data to HTML using LibreOffice
+    # Initialize MS Word Application
+    word = win32com.client.Dispatch("Word.Application")
+    word.Visible = False
+
+    try:
+        # Open the RTF file and save it as HTML
+        doc = word.Documents.Open(temp_rtf_file)
+        doc.SaveAs(html_file_path, FileFormat=8)  # 8 represents wdFormatHTML
+        doc.Close()
+        word.Quit()
+
+        logging.info(f'RTF to HTML conversion complete. HTML file saved to {html_file_path}')
+    except Exception as e:
+        logging.error(f'Error during MS Word conversion: {e}')
+        return None
+
+    return read_and_delete_html_file(html_file_path)
+
+def convert_rtf_to_html_libreoffice(rtf_text, output_dir):
+    """
+    Convert RTF to HTML using LibreOffice
+    """
+    # Path setup
+    temp_rtf_file = os.path.join(output_dir, "temp.rtf")
+    html_file_path = os.path.join(output_dir, "output.html")
+
+    # Write RTF content to a temporary file
+    with open(temp_rtf_file, 'w') as rtf_file:
+        rtf_file.write(rtf_text)
+
+    # Conversion command for LibreOffice
     conversion_command = [
         'libreoffice',
         '--headless',
@@ -44,13 +85,15 @@ def convertRTFtoHTML(rtf_text, output_dir):
         subprocess.run(conversion_command, check=True)
         logging.info(f'RTF to HTML conversion complete. HTML file saved to {html_file_path}')
     except subprocess.CalledProcessError as e:
-        logging.error(f'Error during conversion: {e}')
+        logging.error(f'Error during LibreOffice conversion: {e}')
         return None
 
-    # Cleanup is now handled in a separate function to encapsulate functionality
     return read_and_delete_html_file(os.path.join(output_dir, 'temp.html'))
-    
+
 def read_and_delete_html_file(file_path):
+    """
+    Read HTML file and delete it
+    """
     try:
         with open(file_path, 'r') as html_file:
             html_content = html_file.read()
@@ -122,7 +165,7 @@ def getTargetFolder():
     root.withdraw()
 
     folder_path = filedialog.askdirectory(title="Select a Folder")
-    
+    print(folder_path)
     return folder_path
 
 def main():
@@ -130,7 +173,7 @@ def main():
     target_folder = getTargetFolder()
     if not target_folder:
         logging.error("No target folder selected.")
-        return
+        return target_folder
 
     excel_file = get_excel_filename(target_folder)
     if not excel_file:
@@ -146,7 +189,13 @@ def main():
         order_refs = str(row['OrderRef']).split(',')
 
         # Convert body from RTF to HTML
-        body_html = convertRTFtoHTML(body, target_folder)
+        # Decide conversion method based on OS
+        if platform.system() == "Windows":
+            # Use MS Word conversion
+            body_html = convert_rtf_to_html_msword(body, target_folder)
+        else:
+            # Use LibreOffice conversion
+            body_html = convert_rtf_to_html_libreoffice(body, target_folder)
         if not body_html:
             logging.error("Failed to convert body to HTML.")
             continue
